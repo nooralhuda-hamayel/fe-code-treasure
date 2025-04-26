@@ -1,9 +1,9 @@
 import axios from 'axios';
+import config from '../../app/globals/config';
 
-const serverURL = import.meta.env.VITE_BE_SERVER;
 
 export async function doHealthCheck() {
-  const response = await axios.get(`${serverURL}/api/health_check`);
+  const response = await axios.get(`${config.be_server}/api/health_check`);
 
   if (response.status === 200 && response.data.status === 'ok') {
     return true;
