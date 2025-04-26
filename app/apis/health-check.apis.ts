@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '../../app/globals/config';
+import config from '../globals/env.config';
 
 
 export async function doHealthCheck() {
