@@ -1,0 +1,92 @@
+/* تغطية كاملة للصفحة */
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #f0f0f0;
+}
+
+/* حاوية الصفحة */
+.levels-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* الشبكة */
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1000px;
+  justify-items: center;
+  margin-top: 30px;
+}
+
+/* بطاقة المستوى */
+.level-card {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  max-width: 160px;
+  height: 180px;
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.level-card:hover {
+  transform: translateY(-4px);
+}
+
+.level-card.current {
+  border-color: #4caf50;
+  background-color: #eafbea;
+}
+
+.start-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.start-button:hover {
+  background-color: #45a049;
+}
+
+.locked {
+  color: #999;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.completed {
+  color: #4caf50;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+/* Responsive Text */
+@media (max-width: 480px) {
+  .level-card {
+    height: auto;
+    padding: 16px;
+  }
+
+  .start-button {
+    padding: 6px 12px;
+  }
+}
