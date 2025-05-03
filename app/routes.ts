@@ -1,11 +1,4 @@
 
-// import { type RouteConfig, index, route } from "@react-router/dev/routes";
-
-// export default [
-//     index("routes/home.tsx"),
-//     route("health-check", "./routes/health-check.tsx")
-// ] satisfies RouteConfig;
-
 
 import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
@@ -16,8 +9,3 @@ export default [
     route("auth", "./features/auth/pages/AuthPage.tsx")
 
 ] satisfies RouteConfig;
-
-
-
-
-  
