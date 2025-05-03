@@ -5,6 +5,7 @@
   "scripts": {
     "build": "npm i && react-router build",
     "dev": "react-router dev",
+    "dev-p": "SET NODE_ENV=devprod&& npm run dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
   },
