@@ -6,4 +6,6 @@ export default [
     index("routes/home.tsx"),
     route("health-check", "./routes/health-check.tsx"),
     route("levels", "./routes/levels.tsx"), 
+    route("auth", "./features/auth/pages/AuthPage.tsx")
+
 ] satisfies RouteConfig;
