@@ -1,7 +1,13 @@
 import logoDark from "./logo-dark.svg";
 import logoLight from "./logo-light.svg";
+import {login} from "../../../../apis/auth.apis";
 
 export function Home() {
+
+  function testlogin() {
+    login('noor@mail.com', '123')
+  }
+
   return (
     <main
       className={`flex items-center justify-center pt-16 pb-4 main-section`}
@@ -46,6 +52,13 @@ export function Home() {
                     rel="noreferrer">
                     health check
                   </a>
+                </li>
+                <li>
+                  <button className="group flex items-center gap-3 self-stretch p-3 leading-normal text-blue-700 hover:underline dark:text-blue-500"
+                    onClick={testlogin}
+                    rel="noreferrer">
+                    testlogin
+                  </button>
                 </li>
             </ul>
           </nav>
