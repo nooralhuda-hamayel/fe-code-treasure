@@ -1,7 +1,6 @@
 
 import type { Route } from "./+types/home";
-import LevelsPage from "../features/levels/LevelsPage";
-
+import LevelsPage from "~/src/pages/LevelsPage";
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "Levels" },

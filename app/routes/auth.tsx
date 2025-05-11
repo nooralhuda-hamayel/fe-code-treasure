@@ -1,5 +1,5 @@
 import type { Route } from "./+types/home"; // إن وجد
-import AuthPage from "../features/auth/pages/AuthPage"; // المسار حسب مكان الملف
+import AuthPage from "~/src/pages/AuthPage"; // المسار حسب مكان الملف
 
 export function meta({}: Route.MetaArgs) {
   return [
