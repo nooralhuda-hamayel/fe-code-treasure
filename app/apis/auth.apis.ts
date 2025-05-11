@@ -7,10 +7,11 @@ export async function login(email: string, password: string) {
     password
   });
 
-  console.log(response)
-
-  if (response.status === 200 && response.data.status === 'ok') {
-    return true;
-  } 
-  return false;
+  if (response.status === 200 && response.data) {
+    return response.data as {
+      access_token: string
+    };
+  }
+  
+  throw response;
 }

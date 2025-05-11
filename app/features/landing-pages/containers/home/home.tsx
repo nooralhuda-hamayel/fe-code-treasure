@@ -1,11 +1,18 @@
 import logoDark from "./logo-dark.svg";
 import logoLight from "./logo-light.svg";
 import {login} from "../../../../apis/auth.apis";
+import {getLevels} from "../../../../apis/levels.apis";
 
 export function Home() {
 
   function testlogin() {
     login('noor@mail.com', '123')
+    .then(data => {
+      getLevels(data.access_token)
+      .then(res => {
+        console.log(res)
+      });
+    });
   }
 
   return (
