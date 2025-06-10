@@ -12,7 +12,7 @@ export default function LogoutPage() {
         navigate('/login');
     };
     performLogout();
-  }, [handleLogout, navigate]);
+  }, []);
 
   return (
     <div>
