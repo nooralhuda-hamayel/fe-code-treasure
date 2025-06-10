@@ -3,6 +3,7 @@ import AuthLayout from '../layouts/AuthLayout';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useUser } from '../../shared';
 
 export function meta() {
   return [
@@ -14,6 +15,7 @@ export function meta() {
 export default function LoginPage() {
     const formId = "login-form";
     const { handleLogin, isLoggedIn } = useAuth();
+    const { refetchUser } = useUser();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,8 +25,11 @@ export default function LoginPage() {
     }, []);
 
     const onSubmit = async (data: LoginFormValues) => {
-        await handleLogin(data.email, data.password);
-        navigate('/dashboard');
+        const success = await handleLogin(data.email, data.password);
+        if (success) {
+            await refetchUser();
+            navigate('/dashboard');
+        }
     };
 
     return (

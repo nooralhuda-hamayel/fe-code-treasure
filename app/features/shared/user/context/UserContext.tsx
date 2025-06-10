@@ -1,11 +1,13 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { getMe, type User } from '../../../../apis';
 import { useAuth } from '../../../auth';
+import { getFromLocalStorage } from '../../../../utils/local-storage.utils';
 
 interface UserContextType {
   user: User | null;
   isLoading: boolean;
   error: Error | null;
+  refetchUser: () => Promise<void>;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -16,26 +18,32 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [error, setError] = useState<Error | null>(null);
   const { handleLogout } = useAuth();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      setError(null);
+  const refetchUser = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const userData = await getMe();
+      setUser(userData.user);
+    } catch (err) {
+      handleLogout();
       setUser(null);
-      try {
-        const userData = await getMe();
-        setUser(userData.user);
-      } catch (err) {
-        handleLogout();
-        setError(err as Error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+      setError(err as Error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [handleLogout]);
 
-    fetchUser();
+  useEffect(() => {
+    const accessToken = getFromLocalStorage('accessToken');
+    if (accessToken) {
+      refetchUser();
+    } else {
+      setIsLoading(false);
+    }
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, isLoading, error }}>
+    <UserContext.Provider value={{ user, isLoading, error, refetchUser }}>
       {children}
     </UserContext.Provider>
   );

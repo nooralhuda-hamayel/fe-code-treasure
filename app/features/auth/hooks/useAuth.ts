@@ -7,10 +7,13 @@ export function useAuth() {
       const response = await login(email, password);
       if (response.access_token) {
         saveToLocalStorage('accessToken', response.access_token);
+        return true;
       }
+      return false;
     } catch (error) {
       console.error('Login failed:', error);
       // Here you could set an error state to show in the UI
+      return false;
     }
   };
 
