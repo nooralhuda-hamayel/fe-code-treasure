@@ -31,7 +31,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setIsLoading(false);
     }
-  }, [handleLogout]);
+  }, []);
 
   useEffect(() => {
     const accessToken = getFromLocalStorage('accessToken');
