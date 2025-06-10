@@ -22,7 +22,7 @@ export async function login(email: string, password: string) {
 }
 
 export async function refreshToken() {
-  const response = await api.post('/api/auth/refresh');
+  const response = await api.get('/api/auth/refresh');
 
   if (response.status === 200 && response.data) {
     const data = response.data as {
