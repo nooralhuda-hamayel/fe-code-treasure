@@ -1,9 +1,11 @@
-import axios from 'axios';
-import config from '../globals/env.config';
-
+import api from './api';
 
 export async function doHealthCheck() {
-  const response = await axios.get(`${config.be_server}/api/health_check`);
+  const response = await api.get(`/api/health_check`, {
+    headers: {
+      noAuth: true,
+    },
+  });
 
   if (response.status === 200 && response.data.status === 'ok') {
     return true;

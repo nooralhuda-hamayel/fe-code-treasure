@@ -1,0 +1,1 @@
+export { healthCheckRoutesConfig } from './routes'; 
