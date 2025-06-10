@@ -2,16 +2,14 @@ import {
   isRouteErrorResponse,
   Links,
   Meta,
-  Outlet,
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import { BrowserRouter } from "react-router-dom";
+import App from "./app";
+import React from "react";
 
 import type { Route } from "./+types/root";
-// import { Outlet } from "react-router";
-import { Provider } from "react-redux";
-import { store } from "./store"; 
-import "./app.css";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -44,11 +42,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function App() {
+export default function Root() {
   return (
-    <Provider store={store}>
-      <Outlet />
-    </Provider>
+    <App />
   );
 }
 

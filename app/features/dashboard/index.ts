@@ -1,0 +1,1 @@
+export { dashboardRoutesConfig } from './routes'; 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { doHealthCheck } from "../../../../apis/health-check.apis";
+import { doHealthCheck } from "../../../apis/health-check.apis";
 
-export function HealthCheck() {
+export default function HealthCheckPage() {
   const [isHealthy, setIsHealthy] = useState(false);
   const [checking, setIsChecking] = useState(true);
   useEffect(() => {

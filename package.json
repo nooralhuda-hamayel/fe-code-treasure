@@ -10,19 +10,19 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
-    "@react-router/dev": "^7.5.3",
-    "@react-router/node": "^7.5.3",
-    "@react-router/serve": "^7.5.3",
-    "@reduxjs/toolkit": "^2.8.1",
+    "@hookform/resolvers": "^5.1.1",
+    "@react-router/node": "^7.3.0",
+    "@react-router/serve": "^7.3.0",
     "axios": "^1.9.0",
     "dotenv": "^16.5.0",
     "isbot": "^5.1.17",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-redux": "^9.2.0",
-    "react-router": "^7.5.3",
-    "react-router-dom": "^7.5.3",
-    "sass": "^1.85.1"
+    "react-hook-form": "^7.57.0",
+    "react-router": "^7.3.0",
+    "react-router-dom": "^7.6.2",
+    "sass": "^1.85.1",
+    "zod": "^3.25.57"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",

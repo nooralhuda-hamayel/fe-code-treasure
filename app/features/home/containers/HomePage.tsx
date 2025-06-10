@@ -1,20 +1,8 @@
+import React from 'react';
 import logoDark from "./logo-dark.svg";
 import logoLight from "./logo-light.svg";
-import {login} from "../../../../apis/auth.apis";
-import {getLevels} from "../../../../apis/levels.apis";
 
-export function Home() {
-
-  function testlogin() {
-    login('noor@mail.com', '123')
-    .then(data => {
-      getLevels(data.access_token)
-      .then(res => {
-        console.log(res)
-      });
-    });
-  }
-
+export default function HomePage() {
   return (
     <main
       className={`flex items-center justify-center pt-16 pb-4 main-section`}
@@ -54,19 +42,19 @@ export function Home() {
                 </li>
               ))}
               <li>
-                  <a className="group flex items-center gap-3 self-stretch p-3 leading-normal text-blue-700 hover:underline dark:text-blue-500"
-                    href={'/health-check'}
-                    rel="noreferrer">
-                    health check
-                  </a>
-                </li>
-                <li>
-                  <button className="group flex items-center gap-3 self-stretch p-3 leading-normal text-blue-700 hover:underline dark:text-blue-500"
-                    onClick={testlogin}
-                    rel="noreferrer">
-                    testlogin
-                  </button>
-                </li>
+                <a className="group flex items-center gap-3 self-stretch p-3 leading-normal text-blue-700 hover:underline dark:text-blue-500"
+                  href={'/health-check'}
+                  rel="noreferrer">
+                  health check
+                </a>
+              </li>
+              <li>
+                <a className="group flex items-center gap-3 self-stretch p-3 leading-normal text-blue-700 hover:underline dark:text-blue-500"
+                  href={'/login'}
+                  rel="noreferrer">
+                  Login
+                </a>
+              </li>
             </ul>
           </nav>
         </div>
@@ -115,4 +103,4 @@ const resources = [
       </svg>
     ),
   },
-];
+]; 
