@@ -20,6 +20,3 @@ export const publicPaths = moduleRouteConfigs.flatMap(config => config.public.ma
 export default [
     ...moduleRouteConfigs.flatMap(config => [...config.public, ...config.protected])
 ] satisfies RouteConfig;
-
-
-
