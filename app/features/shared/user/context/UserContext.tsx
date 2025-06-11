@@ -1,7 +1,13 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { getMe, type User } from '../../../../apis';
-import { useAuth } from '../../../auth';
-import { getFromLocalStorage } from '../../../../utils/local-storage.utils';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { getMe, type User } from "../../../../apis";
+import { getFromLocalStorage } from "../../../../libs";
+import { useNavigate } from "react-router-dom";
 
 interface UserContextType {
   user: User | null;
@@ -16,7 +22,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  const { handleLogout } = useAuth();
+  const navigate = useNavigate();
 
   const refetchUser = useCallback(async () => {
     setIsLoading(true);
@@ -25,16 +31,16 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       const userData = await getMe();
       setUser(userData.user);
     } catch (err) {
-      handleLogout();
       setUser(null);
       setError(err as Error);
+      navigate("/logout");
     } finally {
       setIsLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    const accessToken = getFromLocalStorage('accessToken');
+    const accessToken = getFromLocalStorage("accessToken");
     if (accessToken) {
       refetchUser();
     } else {
@@ -52,7 +58,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 export function useUser() {
   const context = useContext(UserContext);
   if (context === undefined) {
-    throw new Error('useUser must be used within a UserProvider');
+    throw new Error("useUser must be used within a UserProvider");
   }
   return context;
-} 
+}
