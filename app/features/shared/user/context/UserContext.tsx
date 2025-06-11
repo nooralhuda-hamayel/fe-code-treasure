@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { getMe, type User } from '../../../../apis';
-import { useAuth } from '../../../auth';
 import { getFromLocalStorage } from '../../../../utils/local-storage.utils';
+import { useNavigate } from 'react-router-dom';
 
 interface UserContextType {
   user: User | null;
@@ -16,7 +16,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  const { handleLogout } = useAuth();
+  const navigate = useNavigate()
 
   const refetchUser = useCallback(async () => {
     setIsLoading(true);
@@ -25,9 +25,9 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       const userData = await getMe();
       setUser(userData.user);
     } catch (err) {
-      handleLogout();
       setUser(null);
       setError(err as Error);
+      navigate('/logout')
     } finally {
       setIsLoading(false);
     }

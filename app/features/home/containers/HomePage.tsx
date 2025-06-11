@@ -55,6 +55,13 @@ export default function HomePage() {
                   Login
                 </a>
               </li>
+              <li>
+                <a className="group flex items-center gap-3 self-stretch p-3 leading-normal text-blue-700 hover:underline dark:text-blue-500"
+                  href={'/signup'}
+                  rel="noreferrer">
+                  Sign up
+                </a>
+              </li>
             </ul>
           </nav>
         </div>

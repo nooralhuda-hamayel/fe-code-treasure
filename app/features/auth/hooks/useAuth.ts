@@ -31,5 +31,10 @@ export function useAuth() {
     return !!getFromLocalStorage('accessToken');
   };
 
-  return { handleLogin, handleLogout, isLoggedIn };
+  const handleSignup = async (name: string, email: string, password: string) => {
+    //TODO
+    return true;
+  }
+
+  return { handleLogin, handleLogout, isLoggedIn, handleSignup };
 }
