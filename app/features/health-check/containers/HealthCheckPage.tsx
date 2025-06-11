@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { doHealthCheck } from "../../../apis/health-check.apis";
+import { doHealthCheck } from "../../../apis";
 
 export default function HealthCheckPage() {
   const [isHealthy, setIsHealthy] = useState(false);

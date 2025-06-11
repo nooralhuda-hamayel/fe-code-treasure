@@ -1,26 +1,26 @@
-import axios from 'axios';
-import { getFromLocalStorage, saveToLocalStorage } from '../utils/local-storage.utils';
-import config from '../globals/env.config';
-import { refreshToken } from './auth/auth.apis';
+import axios from "axios";
+import { getFromLocalStorage } from "../libs";
+import config from "../globals/env.config";
+import { refreshToken } from "./auth/auth.apis";
 
 const axiosInstance = axios.create({
   baseURL: config.be_server,
-  headers: { 'Content-Type': 'application/json' },
+  headers: { "Content-Type": "application/json" },
 });
 
 let isRefreshing = false;
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    if (config.headers['noAuth']) {
-      delete config.headers['noAuth'];
+    if (config.headers["noAuth"]) {
+      delete config.headers["noAuth"];
       return config;
     }
 
-    const accessToken = getFromLocalStorage<string>('accessToken');
+    const accessToken = getFromLocalStorage<string>("accessToken");
 
     if (accessToken) {
-      config.headers['Authorization'] = `Bearer ${accessToken}`;
+      config.headers["Authorization"] = `Bearer ${accessToken}`;
       config.withCredentials = true;
     }
 
@@ -40,7 +40,9 @@ axiosInstance.interceptors.response.use(
 
     if (error.response.status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
-        return Promise.reject(new Error("Token refresh in progress; request failed."));
+        return Promise.reject(
+          new Error("Token refresh in progress; request failed.")
+        );
       }
 
       originalRequest._retry = true;
@@ -49,11 +51,15 @@ axiosInstance.interceptors.response.use(
       try {
         const { access_token } = await refreshToken();
         if (access_token) {
-          axiosInstance.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
-          originalRequest.headers['Authorization'] = 'Bearer ' + access_token;
+          axiosInstance.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${access_token}`;
+          originalRequest.headers["Authorization"] = `Bearer ${access_token}`;
           return axiosInstance(originalRequest);
         } else {
-          return Promise.reject(new Error("No access token received after refresh"));
+          return Promise.reject(
+            new Error("No access token received after refresh")
+          );
         }
       } catch (err: any) {
         return Promise.reject(err);
@@ -66,4 +72,4 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-export default axiosInstance; 
+export default axiosInstance;
